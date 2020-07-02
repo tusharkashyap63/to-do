@@ -1,0 +1,29 @@
+.projectSection {
+  width: 20%;
+  height: 95vh;
+  background-color: hsl(227, 47%, 96%);
+  padding: 1rem;
+  font-weight: 600;
+
+  ul {
+    list-style: none;
+  }
+}
+.addProject {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+
+  button {
+    background-color: var(--color-accent);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    color: var(--color-primary);
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    outline: none;
+  }
+}

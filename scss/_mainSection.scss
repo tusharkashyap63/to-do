@@ -1,0 +1,25 @@
+main {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  clear: right;
+  padding: 2rem 1rem;
+
+  section {
+    width: 33.33333%;
+    padding: 0 1rem;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      border: none;
+      border-radius: 20px;
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+      font-weight: 300;
+      outline: none;
+    }
+  }
+}
