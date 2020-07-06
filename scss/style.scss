@@ -7,17 +7,16 @@
 }
 body {
   font-family: var(--font-stack);
+  color: var(--text-color1);
   background-color: var(--color-primary);
-  width: 95%;
   margin: auto;
-}
-h1 {
-  text-align: center;
 }
 .appInterface {
   display: flex;
 }
 
 @import 'projectSection';
+@import 'modals';
+@import 'modalForm';
 @import 'mainSection';
 @import 'noteCards';

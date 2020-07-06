@@ -4,88 +4,133 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.min.css" />
+    <script
+      src="https://kit.fontawesome.com/f2a0111627.js"
+      crossorigin="anonymous"
+    ></script>
     <title>To-Do</title>
   </head>
-  <body>
-    <h1>TO-DO</h1>
 
+  <body>
     <div class="appInterface">
       <section class="projectSection">
         <div class="addProject">
           <h2>Projects</h2>
-          <button>+</button>
+          <button class="addProjectButton" data-add="project">+</button>
         </div>
-        <ul class="projectList">
-          <li class="defaultProject">Inbox</li>
+        <!-- Add project modal -->
+        <div class="modal" data-modal="project">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h2>New project</h2>
+              <button data-close="project">
+                <i class="far fa-window-close"></i>
+              </button>
+            </header>
+            <form>
+              <input
+                class="form-heading"
+                type="text"
+                placeholder="Name"
+                id="projectName"
+              />
+              <button type="submit" id="projectSubmit">Add</button>
+            </form>
+          </div>
+        </div>
+        <ul id="projectList">
+          <li class="project active">Inbox</li>
         </ul>
       </section>
 
       <main>
         <section class="toDoSection">
-          <header>
+          <header class="section-head">
             <h3>To Do</h3>
-            <button>+ New task</button>
+            <button data-add="todo">+ New task</button>
           </header>
-          <div class="notesContainer">
-            <div class="noteCard">
-              <h3>Design</h3>
-              <p>
-                Create Additional fields for payment flow. Update design system.
-              </p>
-            </div>
-            <div class="noteCard">
-              <h3>Design</h3>
-              <p>
-                Create Additional fields for payment flow. Update design system.
-              </p>
+          <!-- Add todo modal -->
+          <div class="modal" data-modal="todo">
+            <div class="modal-content">
+              <header class="modal-header">
+                <h2>Add task</h2>
+                <button data-close="todo">
+                  <i class="far fa-window-close"></i>
+                </button>
+              </header>
+              <form>
+                <input
+                  class="form-heading"
+                  type="text"
+                  placeholder="Title"
+                  id="todoHeading"
+                />
+                <input
+                  class="form-note"
+                  type="text"
+                  placeholder="Note"
+                  id="todoDescription"
+                />
+                <button type="submit" class="noteSubmit" id="todoSubmit">
+                  Add
+                </button>
+              </form>
             </div>
           </div>
+          <div class="notesContainer" id="todoList"></div>
         </section>
+
         <section class="inProgressSection">
-          <header>
+          <header class="section-head">
             <h3>In Progress</h3>
-            <button>+ New task</button>
+            <button data-add="inprogress">+ New task</button>
           </header>
-          <div class="notesContainer">
-            <div class="noteCard">
-              <h3>Design</h3>
-              <p>
-                Create Additional fields for payment flow. Update design system.
-              </p>
-            </div>
-            <div class="noteCard">
-              <h3>Design</h3>
-              <p>
-                Create Additional fields for payment flow. Update design system.
-              </p>
+          <!-- Add inprogress modal -->
+          <div class="modal" data-modal="inprogress">
+            <div class="modal-content">
+              <header class="modal-header">
+                <h2>Add task</h2>
+                <button data-close="inprogress">
+                  <i class="far fa-window-close"></i>
+                </button>
+              </header>
+              <form>
+                <input
+                  class="form-heading"
+                  type="text"
+                  placeholder="Title"
+                  id="inprogressHeading"
+                />
+                <input
+                  class="form-note"
+                  type="text"
+                  placeholder="Note"
+                  id="inprogressDescription"
+                />
+                <button type="submit" class="noteSubmit" id="inprogressSubmit">
+                  Add
+                </button>
+              </form>
             </div>
           </div>
+
+          <div class="notesContainer" id="inprogressList"></div>
         </section>
+
         <section class="doneSection">
-          <header>
+          <header class="section-head">
             <h3>Done</h3>
-            <button>+ New task</button>
+            <i class="fa fa-check"></i>
           </header>
-          <div class="notesContainer">
-            <div class="noteCard">
-              <h3>Design</h3>
-              <p>
-                Create Additional fields for payment flow. Update design system.
-              </p>
-            </div>
-            <div class="noteCard">
-              <h3>Design</h3>
-              <p>
-                Create Additional fields for payment flow. Update design system.
-              </p>
-            </div>
-          </div>
+          <div class="notesContainer"></div>
         </section>
       </main>
     </div>
+
+    <script src="main.js"></script>
   </body>
 </html>

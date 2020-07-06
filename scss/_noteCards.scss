@@ -1,13 +1,28 @@
 .notesContainer {
   display: flex;
   flex-direction: column;
-  .noteCard {
-    margin-top: 1rem;
-    padding: 1rem;
-    box-shadow: 0px 6px 18px 0px hsla(0, 0%, 0%, 0.2);
+}
 
-    h3 {
-      margin: 1rem 0;
+.noteCard {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+  .note-header {
+    margin-bottom: 1rem;
+    @include flexboxCenter();
+    justify-content: space-between;
+
+    button {
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: none;
+      outline: none;
+      background-color: firebrick;
+      padding: 0.3rem 0.6rem;
+      color: white;
+      cursor: pointer;
     }
   }
 }

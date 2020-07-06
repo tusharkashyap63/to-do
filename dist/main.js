@@ -1,0 +1,125 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./js/app.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./js/app.js":
+/*!*******************!*\
+  !*** ./js/app.js ***!
+  \*******************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modals */ \"./js/modals.js\");\n/* harmony import */ var _userInterface__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./userInterface */ \"./js/userInterface.js\");\n\r\n\r\n\r\nfunction _instanceof(left, right) {\r\n  if (\r\n    right != null &&\r\n    typeof Symbol !== 'undefined' &&\r\n    right[Symbol.hasInstance]\r\n  ) {\r\n    return !!right[Symbol.hasInstance](left);\r\n  } else {\r\n    return left instanceof right;\r\n  }\r\n}\r\n\r\nfunction _classCallCheck(instance, Constructor) {\r\n  if (!_instanceof(instance, Constructor)) {\r\n    throw new TypeError('Cannot call a class as a function');\r\n  }\r\n}\r\n\r\nfunction _defineProperty(obj, key, value) {\r\n  if (key in obj) {\r\n    Object.defineProperty(obj, key, {\r\n      value: value,\r\n      enumerable: true,\r\n      configurable: true,\r\n      writable: true,\r\n    });\r\n  } else {\r\n    obj[key] = value;\r\n  }\r\n  return obj;\r\n}\r\n\r\nvar ProjectData = function ProjectData() {\r\n  _classCallCheck(this, ProjectData);\r\n};\r\n\r\n_defineProperty(ProjectData, 'projectData', [\r\n  {\r\n    name: 'Inbox',\r\n    todo: [],\r\n    inprogress: [],\r\n    done: [],\r\n  },\r\n]);\r\n\r\n_defineProperty(ProjectData, 'activeProject', 0);\r\n\r\n// All of the above code except imports is a Babel transpilation of:\r\n// class ProjectData {\r\n//   static projectData = [\r\n//   {\r\n//     name: 'Inbox',\r\n//     todo: [],\r\n//     inprogress: [],\r\n//     done: [],\r\n//   },\r\n// ];\r\n//   static activeProject = 0;\r\n// }\r\n\r\nclass Project {\r\n  constructor(name) {\r\n    this.name = name;\r\n    this.todo = [];\r\n    this.inprogress = [];\r\n    this.done = [];\r\n  }\r\n\r\n  static addProject(project) {\r\n    ProjectData.projectData.push(project);\r\n    console.log(ProjectData.projectData);\r\n  }\r\n}\r\n\r\nclass Note {\r\n  constructor(heading, description) {\r\n    this.heading = heading;\r\n    this.description = description;\r\n  }\r\n\r\n  static addNoteToTodo(note) {\r\n    ProjectData.projectData[ProjectData.activeProject].todo.push(note);\r\n  }\r\n\r\n  static addNoteToInProgress(note) {\r\n    ProjectData.projectData[ProjectData.activeProject].inprogress.push(note);\r\n  }\r\n}\r\n\r\n// Event Listeners\r\n// To add a project\r\ndocument.getElementById('projectSubmit').addEventListener('click', (e) => {\r\n  e.preventDefault();\r\n  const projectNameInput = document.getElementById('projectName').value;\r\n  const newProject = new Project(projectNameInput);\r\n  Project.addProject(newProject);\r\n  _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].addProjectToList(newProject);\r\n  _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].clearFields();\r\n});\r\n\r\n// To delete a project\r\ndocument.getElementById('projectList').addEventListener('click', (e) => {\r\n  _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].deleteProjectFromList(e);\r\n  _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].toggleActiveProject(e);\r\n});\r\n\r\n// To add a note\r\ndocument.querySelectorAll('.noteSubmit').forEach((button) =>\r\n  button.addEventListener('click', (e) => {\r\n    e.preventDefault();\r\n    if (e.target.id === 'todoSubmit') {\r\n      const todoHeadingInput = document.getElementById('todoHeading').value;\r\n      const todoDescriptionInput = document.getElementById('todoDescription')\r\n        .value;\r\n      const newNote = new Note(todoHeadingInput, todoDescriptionInput);\r\n      Note.addNoteToTodo(newNote);\r\n      _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].addNoteToTodoList(newNote);\r\n    } else if (e.target.id === 'inprogressSubmit') {\r\n      const inprogressHeadingInput = document.getElementById(\r\n        'inprogressHeading'\r\n      ).value;\r\n      const inprogressDescriptionInput = document.getElementById(\r\n        'inprogressDescription'\r\n      ).value;\r\n      const newNote = new Note(\r\n        inprogressHeadingInput,\r\n        inprogressDescriptionInput\r\n      );\r\n      Note.addNoteToInProgress(newNote);\r\n      _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].addNoteToInprogressList(newNote);\r\n    }\r\n    _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].clearFields();\r\n  })\r\n);\r\n\r\n// To delete a note\r\ndocument\r\n  .querySelectorAll('.notesContainer')\r\n  .forEach((container) =>\r\n    container.addEventListener('click', _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].deleteNoteFromList)\r\n  );\r\n\r\n// Initial load\r\ndocument.addEventListener('DOMContentLoaded', _userInterface__WEBPACK_IMPORTED_MODULE_1__[\"default\"].displayBooks);\r\n\r\n//Modal events\r\ndocument\r\n  .querySelectorAll('[data-add]')\r\n  .forEach((button) => button.addEventListener('click', _modals__WEBPACK_IMPORTED_MODULE_0__[\"default\"].openModal));\r\ndocument\r\n  .querySelectorAll('[data-close')\r\n  .forEach((button) => button.addEventListener('click', _modals__WEBPACK_IMPORTED_MODULE_0__[\"default\"].closeModal));\r\nwindow.addEventListener('click', _modals__WEBPACK_IMPORTED_MODULE_0__[\"default\"].outsideClick);\r\n\n\n//# sourceURL=webpack:///./js/app.js?");
+
+/***/ }),
+
+/***/ "./js/modals.js":
+/*!**********************!*\
+  !*** ./js/modals.js ***!
+  \**********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Modal; });\nclass Modal {\r\n  static getModals() {\r\n    return document.querySelectorAll('[data-modal]');\r\n  }\r\n\r\n  // Open\r\n  static openModal(e) {\r\n    let modals = Modal.getModals();\r\n    modals.forEach((modal) => {\r\n      if (\r\n        e.target.getAttribute('data-add') === modal.getAttribute('data-modal')\r\n      ) {\r\n        modal.style.display = 'block';\r\n      }\r\n    });\r\n  }\r\n\r\n  // Close\r\n  static closeModal() {\r\n    let modals = Modal.getModals();\r\n    modals.forEach((modal) => (modal.style.display = 'none'));\r\n  }\r\n\r\n  // Close If Outside Click\r\n  static outsideClick(e) {\r\n    let modals = Modal.getModals();\r\n    modals.forEach((modal) => {\r\n      if (e.target === modal) {\r\n        modal.style.display = 'none';\r\n      }\r\n    });\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./js/modals.js?");
+
+/***/ }),
+
+/***/ "./js/userInterface.js":
+/*!*****************************!*\
+  !*** ./js/userInterface.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return UI; });\nclass UI {\r\n  static addProjectToList(project) {\r\n    const projectList = document.getElementById('projectList');\r\n    const newProject = document.createElement('li');\r\n    newProject.classList.add('project');\r\n    newProject.innerHTML = `${project.name}<i class=\"far fa-trash-alt\" id=\"deleteProject\"></i>`;\r\n    projectList.appendChild(newProject);\r\n  }\r\n\r\n  static deleteProjectFromList(e) {\r\n    if (e.target.id === 'deleteProject') {\r\n      e.target.parentElement.remove();\r\n    }\r\n  }\r\n\r\n  static toggleActiveProject(e) {\r\n    if (e.target.classList.contains('project')) {\r\n      const projects = document.querySelectorAll('.project');\r\n      projects.forEach((project) => project.classList.remove('active'));\r\n      e.target.classList.add('active');\r\n    }\r\n  }\r\n\r\n  static addNoteToTodoList(note) {\r\n    let list = document.getElementById('todoList');\r\n    let newNote = document.createElement('div');\r\n    newNote.classList.add('noteCard');\r\n    newNote.innerHTML = `<header class=\"note-header\">\r\n            <h3>${note.heading}</h3>\r\n            <button class=\"trashNote\">x</button>\r\n          </header>\r\n          <p>${note.description}</p>`;\r\n    list.appendChild(newNote);\r\n  }\r\n\r\n  static addNoteToInprogressList(note) {\r\n    let list = document.getElementById('inprogressList');\r\n    let newNote = document.createElement('div');\r\n    newNote.classList.add('noteCard');\r\n    newNote.innerHTML = `<header class=\"note-header\">\r\n            <h3>${note.heading}</h3>\r\n            <button class=\"trashNote\">x</button>\r\n          </header>\r\n          <p>${note.description}</p>`;\r\n    list.appendChild(newNote);\r\n  }\r\n\r\n  static deleteNoteFromList(e) {\r\n    if (e.target.classList.contains('trashNote')) {\r\n      e.target.parentElement.parentElement.remove();\r\n    }\r\n  }\r\n\r\n  static clearFields() {\r\n    document\r\n      .querySelectorAll('.form-heading')\r\n      .forEach((heading) => (heading.value = ''));\r\n    document\r\n      .querySelectorAll('.form-note')\r\n      .forEach((note) => (note.value = ''));\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./js/userInterface.js?");
+
+/***/ })
+
+/******/ });

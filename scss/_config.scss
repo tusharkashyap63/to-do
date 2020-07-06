@@ -1,7 +1,14 @@
 :root {
-  --color-primary: #fcfcfc;
-  --color-accent: #441151;
-  --text-color1: hsl(230, 17%, 14%);
+  --color-primary: white;
+  --color-accent: #000080;
+  --text-color1: black;
   --text-color2: hsl(228, 12%, 44%);
-  --font-stack: 'Montserrat', sans-serif;
+  --card-bg: white;
+  --font-stack: 'Inter', sans-serif;
+}
+
+@mixin flexboxCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

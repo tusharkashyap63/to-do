@@ -9,8 +9,8 @@ main {
     width: 33.33333%;
     padding: 0 1rem;
   }
-  header {
-    display: flex;
+  .section-head {
+    @include flexboxCenter();
     justify-content: space-between;
 
     button {
@@ -20,6 +20,8 @@ main {
       cursor: pointer;
       font-weight: 300;
       outline: none;
+      background-color: var(--color-accent);
+      color: var(--color-primary);
     }
   }
 }
