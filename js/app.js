@@ -69,9 +69,36 @@ class Project {
     this.done = [];
   }
 
+  static changeActiveProject(e) {
+    if (e.target.classList.contains('project')) {
+      let projects = document.querySelectorAll('.project');
+      let projectsArr = Array.from(projects);
+      for (let i in projectsArr) {
+        if (projectsArr[i].classList.contains('active')) {
+          ProjectData.activeProject = i;
+        }
+      }
+    }
+  }
+
   static addProject(project) {
     ProjectData.projectData.push(project);
     console.log(ProjectData.projectData);
+  }
+
+  static deleteProject(e) {
+    if (e.target.id === 'deleteProject') {
+      e.target.parentElement.classList.add('toBeDeleted');
+      let deleteIcons = document.querySelectorAll('#deleteProject');
+      let deleteIconsArr = Array.from(deleteIcons);
+      for (let i in deleteIconsArr) {
+        if (deleteIconsArr[i].parentElement.classList.contains('toBeDeleted')) {
+          let id = Number(i);
+          ProjectData.projectData.splice(id + 1, 1); // id+1 because inbox does not have a delete icon
+        }
+      }
+    }
+    console.log(ProjectData.activeProject);
   }
 }
 
@@ -94,6 +121,7 @@ class Note {
 // To add a project
 document.getElementById('projectSubmit').addEventListener('click', (e) => {
   e.preventDefault();
+  ProjectData.activeProject++;
   const projectNameInput = document.getElementById('projectName').value;
   const newProject = new Project(projectNameInput);
   Project.addProject(newProject);
@@ -101,10 +129,16 @@ document.getElementById('projectSubmit').addEventListener('click', (e) => {
   UI.clearFields();
 });
 
-// To delete a project
+// To delete a project or to change the active project
 document.getElementById('projectList').addEventListener('click', (e) => {
+  Project.deleteProject(e);
   UI.deleteProjectFromList(e);
   UI.toggleActiveProject(e);
+  Project.changeActiveProject(e);
+  UI.displayActiveProjectNotes(
+    e,
+    ProjectData.projectData[ProjectData.activeProject]
+  );
 });
 
 // To add a note
@@ -143,8 +177,8 @@ document
     container.addEventListener('click', UI.deleteNoteFromList)
   );
 
-// Initial load
-document.addEventListener('DOMContentLoaded', UI.displayBooks);
+// // Initial load
+// document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
 //Modal events
 document
