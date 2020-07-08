@@ -32,7 +32,7 @@ export default class UI {
     newNote.classList.add('noteCard');
     newNote.innerHTML = `<header class="note-header">
             <h3>${note.heading}</h3>
-            <button class="trashNote">x</button>
+            <button class="trashNoteTodo">x</button>
           </header>
           <p>${note.description}</p>`;
     list.appendChild(newNote);
@@ -44,27 +44,24 @@ export default class UI {
     newNote.classList.add('noteCard');
     newNote.innerHTML = `<header class="note-header">
             <h3>${note.heading}</h3>
-            <button class="trashNote">x</button>
+            <button class="trashNoteInprogress">x</button>
           </header>
           <p>${note.description}</p>`;
     list.appendChild(newNote);
   }
 
   static deleteNoteFromList(e) {
-    if (e.target.classList.contains('trashNote')) {
-      e.target.parentElement.parentElement.remove();
-    }
+    e.target.parentElement.parentElement.remove();
   }
 
   static clearDisplay() {
-    let todoList = document.getElementById('todoList').childNodes;
-    todoList.forEach((card) => card.remove());
-    let inprogressList = document.getElementById('todoList').childNodes;
-    inprogressList.forEach((card) => card.remove());
+    let allNotes = document.querySelectorAll('.noteCard');
+    allNotes.forEach((note) => note.remove());
   }
 
   static displayActiveProjectNotes(activeProject) {
     UI.clearDisplay();
+    console.log(activeProject.todo);
     for (let i = 0; i < activeProject.todo.length; i++) {
       UI.addNoteToTodoList(activeProject.todo[i]);
     }

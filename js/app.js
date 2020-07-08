@@ -80,7 +80,6 @@ class Project {
   }
 
   static addProject(project) {
-    // ProjectData.activeProject++;
     ProjectData.projectData.push(project);
     Project.changeActiveProject();
     console.log(ProjectData.projectData);
@@ -114,6 +113,34 @@ class Note {
   static addNoteToInProgress(note) {
     ProjectData.projectData[ProjectData.activeProject].inprogress.push(note);
   }
+
+  static deleteNoteTodo(e) {
+    e.target.parentElement.classList.add('toBeDeleted');
+    let deleteButtons = document.querySelectorAll('.trashNoteTodo');
+    let deleteButtonsArr = Array.from(deleteButtons);
+    for (let i in deleteButtonsArr) {
+      if (deleteButtonsArr[i].parentElement.classList.contains('toBeDeleted')) {
+        let id = Number(i);
+        ProjectData.projectData[ProjectData.activeProject].todo.splice(id, 1);
+      }
+    }
+    console.log(ProjectData.projectData);
+  }
+
+  static deleteNoteInprogress(e) {
+    e.target.parentElement.classList.add('toBeDeleted');
+    let deleteButtons = document.querySelectorAll('.trashNoteInprogress');
+    let deleteButtonsArr = Array.from(deleteButtons);
+    for (let i in deleteButtonsArr) {
+      if (deleteButtonsArr[i].parentElement.classList.contains('toBeDeleted')) {
+        let id = Number(i);
+        ProjectData.projectData[ProjectData.activeProject].inprogress.splice(
+          id,
+          1
+        );
+      }
+    }
+  }
 }
 
 // Event Listeners
@@ -136,11 +163,11 @@ document.getElementById('projectList').addEventListener('click', (e) => {
     console.log(ProjectData.activeProject);
   } else if (e.target.classList.contains('project')) {
     UI.toggleActiveProject(e);
-    Project.changeActiveProject(e);
+    Project.changeActiveProject();
     UI.displayActiveProjectNotes(
       ProjectData.projectData[ProjectData.activeProject]
     );
-    console.log(ProjectData.activeProject);
+    console.log(ProjectData.projectData);
   }
 });
 
@@ -169,16 +196,28 @@ document.querySelectorAll('.noteSubmit').forEach((button) =>
       Note.addNoteToInProgress(newNote);
       UI.addNoteToInprogressList(newNote);
     }
+    console.log(ProjectData.projectData);
     UI.clearFields();
   })
 );
 
-// To delete a note
-document
-  .querySelectorAll('.notesContainer')
-  .forEach((container) =>
-    container.addEventListener('click', UI.deleteNoteFromList)
-  );
+// To delete a note from todo
+document.getElementById('todoList').addEventListener('click', (e) => {
+  if (e.target.classList.contains('trashNoteTodo')) {
+    Note.deleteNoteTodo(e);
+    UI.deleteNoteFromList(e);
+    console.log(ProjectData.projectData);
+  }
+});
+
+// To delete a note from inprogress
+document.getElementById('inprogressList').addEventListener('click', (e) => {
+  if (e.target.classList.contains('trashNoteInprogress')) {
+    Note.deleteNoteInprogress(e);
+    UI.deleteNoteFromList(e);
+    console.log(ProjectData.projectData);
+  }
+});
 
 // // Initial load
 // document.addEventListener('DOMContentLoaded', UI.displayBooks);
