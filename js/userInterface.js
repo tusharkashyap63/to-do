@@ -14,17 +14,16 @@ export default class UI {
   }
 
   static deleteProjectFromList(e) {
-    if (e.target.id === 'deleteProject') {
-      e.target.parentElement.remove();
+    if (e.target.parentElement.classList.contains('active')) {
+      const firstProject = document.querySelectorAll('.project')[0];
+      firstProject.classList.add('active');
     }
+    e.target.parentElement.remove();
   }
 
   static toggleActiveProject(e) {
-    if (e.target.classList.contains('project')) {
-      const projects = document.querySelectorAll('.project');
-      projects.forEach((project) => project.classList.remove('active'));
-      e.target.classList.add('active');
-    }
+    UI.removeActiveFromAllProjects();
+    e.target.classList.add('active');
   }
 
   static addNoteToTodoList(note) {
@@ -64,15 +63,13 @@ export default class UI {
     inprogressList.forEach((card) => card.remove());
   }
 
-  static displayActiveProjectNotes(e, activeProject) {
-    if (e.target.classList.contains('project')) {
-      UI.clearDisplay();
-      for (let i = 0; i < activeProject.todo.length; i++) {
-        UI.addNoteToTodoList(activeProject.todo[i]);
-      }
-      for (let j = 0; j < activeProject.inprogress.length; j++) {
-        UI.addNoteToInprogressList(activeProject.inprogress[j]);
-      }
+  static displayActiveProjectNotes(activeProject) {
+    UI.clearDisplay();
+    for (let i = 0; i < activeProject.todo.length; i++) {
+      UI.addNoteToTodoList(activeProject.todo[i]);
+    }
+    for (let j = 0; j < activeProject.inprogress.length; j++) {
+      UI.addNoteToInprogressList(activeProject.inprogress[j]);
     }
   }
 

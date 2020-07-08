@@ -69,36 +69,35 @@ class Project {
     this.done = [];
   }
 
-  static changeActiveProject(e) {
-    if (e.target.classList.contains('project')) {
-      let projects = document.querySelectorAll('.project');
-      let projectsArr = Array.from(projects);
-      for (let i in projectsArr) {
-        if (projectsArr[i].classList.contains('active')) {
-          ProjectData.activeProject = i;
-        }
+  static changeActiveProject() {
+    let projects = document.querySelectorAll('.project');
+    let projectsArr = Array.from(projects);
+    for (let i in projectsArr) {
+      if (projectsArr[i].classList.contains('active')) {
+        ProjectData.activeProject = i;
       }
     }
   }
 
   static addProject(project) {
+    // ProjectData.activeProject++;
     ProjectData.projectData.push(project);
+    Project.changeActiveProject();
     console.log(ProjectData.projectData);
+    console.log(ProjectData.activeProject);
   }
 
   static deleteProject(e) {
-    if (e.target.id === 'deleteProject') {
-      e.target.parentElement.classList.add('toBeDeleted');
-      let deleteIcons = document.querySelectorAll('#deleteProject');
-      let deleteIconsArr = Array.from(deleteIcons);
-      for (let i in deleteIconsArr) {
-        if (deleteIconsArr[i].parentElement.classList.contains('toBeDeleted')) {
-          let id = Number(i);
-          ProjectData.projectData.splice(id + 1, 1); // id+1 because inbox does not have a delete icon
-        }
+    e.target.parentElement.classList.add('toBeDeleted');
+    let deleteIcons = document.querySelectorAll('#deleteProject');
+    let deleteIconsArr = Array.from(deleteIcons);
+    for (let i in deleteIconsArr) {
+      if (deleteIconsArr[i].parentElement.classList.contains('toBeDeleted')) {
+        let id = Number(i);
+        ProjectData.projectData.splice(id + 1, 1); // id+1 because inbox does not have a delete icon
       }
     }
-    console.log(ProjectData.activeProject);
+    console.log(ProjectData.projectData);
   }
 }
 
@@ -121,24 +120,28 @@ class Note {
 // To add a project
 document.getElementById('projectSubmit').addEventListener('click', (e) => {
   e.preventDefault();
-  ProjectData.activeProject++;
   const projectNameInput = document.getElementById('projectName').value;
   const newProject = new Project(projectNameInput);
-  Project.addProject(newProject);
   UI.addProjectToList(newProject);
+  Project.addProject(newProject);
   UI.clearFields();
 });
 
 // To delete a project or to change the active project
 document.getElementById('projectList').addEventListener('click', (e) => {
-  Project.deleteProject(e);
-  UI.deleteProjectFromList(e);
-  UI.toggleActiveProject(e);
-  Project.changeActiveProject(e);
-  UI.displayActiveProjectNotes(
-    e,
-    ProjectData.projectData[ProjectData.activeProject]
-  );
+  if (e.target.id === 'deleteProject') {
+    Project.deleteProject(e);
+    UI.deleteProjectFromList(e);
+    Project.changeActiveProject();
+    console.log(ProjectData.activeProject);
+  } else if (e.target.classList.contains('project')) {
+    UI.toggleActiveProject(e);
+    Project.changeActiveProject(e);
+    UI.displayActiveProjectNotes(
+      ProjectData.projectData[ProjectData.activeProject]
+    );
+    console.log(ProjectData.activeProject);
+  }
 });
 
 // To add a note
