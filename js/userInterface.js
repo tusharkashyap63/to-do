@@ -4,19 +4,30 @@ export default class UI {
     projects.forEach((project) => project.classList.remove('active'));
   }
 
+  static clearDisplay() {
+    let allNotes = document.querySelectorAll('.noteCard');
+    allNotes.forEach((note) => note.remove());
+  }
+
   static addProjectToList(project) {
     const projectList = document.getElementById('projectList');
-    const newProject = document.createElement('li');
     UI.removeActiveFromAllProjects();
+    UI.clearDisplay();
+    const newProject = document.createElement('li');
     newProject.classList.add('project', 'active');
     newProject.innerHTML = `${project.name}<i class="far fa-trash-alt" id="deleteProject"></i>`;
     projectList.appendChild(newProject);
   }
 
-  static deleteProjectFromList(e) {
+  static displayInboxNotes(projectInbox) {
+    UI.displayActiveProjectNotes(projectInbox);
+  }
+
+  static deleteProjectFromList(e, projectInbox) {
     if (e.target.parentElement.classList.contains('active')) {
       const firstProject = document.querySelectorAll('.project')[0];
       firstProject.classList.add('active');
+      UI.displayInboxNotes(projectInbox);
     }
     e.target.parentElement.remove();
   }
@@ -34,7 +45,8 @@ export default class UI {
             <h3>${note.heading}</h3>
             <button class="trashNoteTodo">x</button>
           </header>
-          <p>${note.description}</p>`;
+          <p>${note.description}</p>
+          <button class="moveToDone">Move to Done</button>`;
     list.appendChild(newNote);
   }
 
@@ -46,17 +58,25 @@ export default class UI {
             <h3>${note.heading}</h3>
             <button class="trashNoteInprogress">x</button>
           </header>
-          <p>${note.description}</p>`;
+          <p>${note.description}</p>
+          <button class="moveToDone">Move to Done</button>`;
     list.appendChild(newNote);
   }
 
+  // static moveNoteToDoneList(note) {
+  //   let list = document.getElementById('doneList');
+  //   let newNote = document.createElement('div');
+  //   newNote.classList.add('noteCard');
+  //   newNote.innerHTML = `<header class="note-header">
+  //           <h3>${note.heading}</h3>
+  //           <button class="trashNoteInprogress">x</button>
+  //         </header>
+  //         <p>${note.description}</p>`;
+  //   list.appendChild(newNote);
+  // }
+
   static deleteNoteFromList(e) {
     e.target.parentElement.parentElement.remove();
-  }
-
-  static clearDisplay() {
-    let allNotes = document.querySelectorAll('.noteCard');
-    allNotes.forEach((note) => note.remove());
   }
 
   static displayActiveProjectNotes(activeProject) {

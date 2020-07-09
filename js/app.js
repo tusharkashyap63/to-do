@@ -141,8 +141,41 @@ class Note {
       }
     }
   }
-}
 
+  static moveNoteFromTodoToDone(e) {
+    e.target.parentElement.classList.add('toBeMoved');
+    let moveButtons = document.querySelectorAll('.moveToDone');
+    let moveButtonsArr = Array.from(moveButtons);
+    for (let i in moveButtonsArr) {
+      if (moveButtonsArr[i].parentElement.classList.contains('toBeMoved')) {
+        let id = Number(i);
+        ProjectData.projectData[ProjectData.activeProject].done.push(
+          ProjectData.projectData[ProjectData.activeProject].todo[id]
+        );
+        ProjectData.projectData[ProjectData.activeProject].todo.splice(id, 1);
+      }
+    }
+  }
+
+  static moveNoteFromInprogressToDone(e) {
+    e.target.parentElement.classList.add('toBeMoved');
+    let moveButtons = document.querySelectorAll('.moveToDone');
+    let moveButtonsArr = Array.from(moveButtons);
+    for (let i in moveButtonsArr) {
+      if (moveButtonsArr[i].parentElement.classList.contains('toBeMoved')) {
+        let id = Number(i);
+        ProjectData.projectData[ProjectData.activeProject].done.push(
+          ProjectData.projectData[ProjectData.activeProject].inprogress[id]
+        );
+        ProjectData.projectData[ProjectData.activeProject].inprogress.splice(
+          id,
+          1
+        );
+      }
+    }
+    console.log(ProjectData.projectData);
+  }
+}
 // Event Listeners
 // To add a project
 document.getElementById('projectSubmit').addEventListener('click', (e) => {
@@ -158,7 +191,7 @@ document.getElementById('projectSubmit').addEventListener('click', (e) => {
 document.getElementById('projectList').addEventListener('click', (e) => {
   if (e.target.id === 'deleteProject') {
     Project.deleteProject(e);
-    UI.deleteProjectFromList(e);
+    UI.deleteProjectFromList(e, ProjectData.projectData[0]);
     Project.changeActiveProject();
     console.log(ProjectData.activeProject);
   } else if (e.target.classList.contains('project')) {
@@ -218,6 +251,20 @@ document.getElementById('inprogressList').addEventListener('click', (e) => {
     console.log(ProjectData.projectData);
   }
 });
+
+// To move a note to Done
+document.querySelectorAll('.notesContainer').forEach((container) =>
+  container.addEventListener('click', (e) => {
+    if (e.target.classList.contains('moveToDone')) {
+      if (e.target.parentElement.parentElement.id === 'todoList') {
+        Note.moveNoteFromTodoToDone(e);
+      } else if (e.target.parentElement.parentElement.id === 'inprogressList') {
+        Note.moveNoteFromInprogressToDone(e);
+      }
+      // UI.moveNoteToDoneList(e, ProjectData.projectData[ProjectData.activeProject].todo[]);
+    }
+  })
+);
 
 // // Initial load
 // document.addEventListener('DOMContentLoaded', UI.displayBooks);
