@@ -46,7 +46,7 @@ export default class UI {
             <button class="trashNoteTodo">x</button>
           </header>
           <p>${note.description}</p>
-          <button class="moveToDone">Move to Done</button>`;
+          <button class="moveToDoneFromTodo">Move to Done</button>`;
     list.appendChild(newNote);
   }
 
@@ -59,21 +59,24 @@ export default class UI {
             <button class="trashNoteInprogress">x</button>
           </header>
           <p>${note.description}</p>
-          <button class="moveToDone">Move to Done</button>`;
+          <button class="moveToDoneFromInprogress">Move to Done</button>`;
     list.appendChild(newNote);
   }
 
-  // static moveNoteToDoneList(note) {
-  //   let list = document.getElementById('doneList');
-  //   let newNote = document.createElement('div');
-  //   newNote.classList.add('noteCard');
-  //   newNote.innerHTML = `<header class="note-header">
-  //           <h3>${note.heading}</h3>
-  //           <button class="trashNoteInprogress">x</button>
-  //         </header>
-  //         <p>${note.description}</p>`;
-  //   list.appendChild(newNote);
-  // }
+  static moveNoteToDoneList(note, e) {
+    if (!(e === undefined)) {
+      e.target.parentElement.remove();
+    }
+    let list = document.getElementById('doneList');
+    let newNote = document.createElement('div');
+    newNote.classList.add('noteCard');
+    newNote.innerHTML = `<header class="note-header">
+            <h3>${note.heading}</h3>
+            <button class="trashNoteDone">x</button>
+          </header>
+          <p>${note.description}</p>`;
+    list.appendChild(newNote);
+  }
 
   static deleteNoteFromList(e) {
     e.target.parentElement.parentElement.remove();
@@ -81,12 +84,15 @@ export default class UI {
 
   static displayActiveProjectNotes(activeProject) {
     UI.clearDisplay();
-    console.log(activeProject.todo);
+    console.log(activeProject.done);
     for (let i = 0; i < activeProject.todo.length; i++) {
       UI.addNoteToTodoList(activeProject.todo[i]);
     }
     for (let j = 0; j < activeProject.inprogress.length; j++) {
       UI.addNoteToInprogressList(activeProject.inprogress[j]);
+    }
+    for (let k = 0; k < activeProject.done.length; k++) {
+      UI.moveNoteToDoneList(activeProject.done[k]);
     }
   }
 
