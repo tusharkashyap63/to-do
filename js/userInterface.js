@@ -84,7 +84,6 @@ export default class UI {
 
   static displayActiveProjectNotes(activeProject) {
     UI.clearDisplay();
-    console.log(activeProject.done);
     for (let i = 0; i < activeProject.todo.length; i++) {
       UI.addNoteToTodoList(activeProject.todo[i]);
     }

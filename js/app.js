@@ -70,8 +70,8 @@ class Project {
   }
 
   static changeActiveProject() {
-    let projects = document.querySelectorAll('.project');
-    let projectsArr = Array.from(projects);
+    const projects = document.querySelectorAll('.project');
+    const projectsArr = Array.from(projects);
     for (let i in projectsArr) {
       if (projectsArr[i].classList.contains('active')) {
         ProjectData.activeProject = i;
@@ -82,21 +82,18 @@ class Project {
   static addProject(project) {
     ProjectData.projectData.push(project);
     Project.changeActiveProject();
-    console.log(ProjectData.projectData);
-    console.log(ProjectData.activeProject);
   }
 
   static deleteProject(e) {
     e.target.parentElement.classList.add('toBeDeleted');
-    let deleteIcons = document.querySelectorAll('#deleteProject');
-    let deleteIconsArr = Array.from(deleteIcons);
+    const deleteIcons = document.querySelectorAll('#deleteProject');
+    const deleteIconsArr = Array.from(deleteIcons);
     for (let i in deleteIconsArr) {
       if (deleteIconsArr[i].parentElement.classList.contains('toBeDeleted')) {
-        let id = Number(i);
+        const id = Number(i);
         ProjectData.projectData.splice(id + 1, 1); // id+1 because inbox does not have a delete icon
       }
     }
-    console.log(ProjectData.projectData);
   }
 }
 
@@ -124,7 +121,6 @@ class Note {
         ProjectData.projectData[ProjectData.activeProject].todo.splice(id, 1);
       }
     }
-    console.log(ProjectData.projectData);
   }
 
   static deleteNoteInprogress(e) {
@@ -171,7 +167,6 @@ class Note {
         ProjectData.projectData[ProjectData.activeProject].todo.splice(id, 1);
       }
     }
-    console.log(ProjectData.projectData);
   }
 
   static moveNoteFromInprogressToDone(e) {
@@ -194,7 +189,6 @@ class Note {
         );
       }
     }
-    console.log(ProjectData.projectData);
   }
 }
 
@@ -216,14 +210,12 @@ document.getElementById('projectList').addEventListener('click', (e) => {
     Project.deleteProject(e);
     UI.deleteProjectFromList(e, ProjectData.projectData[0]);
     Project.changeActiveProject();
-    console.log(ProjectData.projectData);
   } else if (e.target.classList.contains('project')) {
     UI.toggleActiveProject(e);
     Project.changeActiveProject();
     UI.displayActiveProjectNotes(
       ProjectData.projectData[ProjectData.activeProject]
     );
-    console.log(ProjectData.projectData);
   }
 });
 
@@ -252,7 +244,6 @@ document.querySelectorAll('.noteSubmit').forEach((button) =>
       Note.addNoteToInProgress(newNote);
       UI.addNoteToInprogressList(newNote);
     }
-    console.log(ProjectData.projectData);
     UI.clearFields();
   })
 );
@@ -262,7 +253,6 @@ document.getElementById('todoList').addEventListener('click', (e) => {
   if (e.target.classList.contains('trashNoteTodo')) {
     Note.deleteNoteTodo(e);
     UI.deleteNoteFromList(e);
-    console.log(ProjectData.projectData);
   }
 });
 
@@ -271,7 +261,6 @@ document.getElementById('inprogressList').addEventListener('click', (e) => {
   if (e.target.classList.contains('trashNoteInprogress')) {
     Note.deleteNoteInprogress(e);
     UI.deleteNoteFromList(e);
-    console.log(ProjectData.projectData);
   }
 });
 
@@ -280,25 +269,24 @@ document.getElementById('doneList').addEventListener('click', (e) => {
   if (e.target.classList.contains('trashNoteDone')) {
     Note.deleteNoteDone(e);
     UI.deleteNoteFromList(e);
-    console.log(ProjectData.projectData);
   }
 });
 
 // To move a note to Done
-document.querySelectorAll('.notesContainer').forEach((container) =>
+document.querySelectorAll('.notesContainer').forEach((container) => {
   container.addEventListener('click', (e) => {
     if (e.target.classList.contains('moveToDoneFromTodo')) {
       Note.moveNoteFromTodoToDone(e);
     } else if (e.target.classList.contains('moveToDoneFromInprogress')) {
       Note.moveNoteFromInprogressToDone(e);
     }
-  })
-);
+  });
+});
 
 // // Initial load
 // document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
-//Modal events
+// Modal events
 document
   .querySelectorAll('[data-add]')
   .forEach((button) => button.addEventListener('click', Modal.openModal));

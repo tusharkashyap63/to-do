@@ -5,7 +5,7 @@ export default class Modal {
 
   // Open
   static openModal(e) {
-    let modals = Modal.getModals();
+    const modals = Modal.getModals();
     modals.forEach((modal) => {
       if (
         e.target.getAttribute('data-add') === modal.getAttribute('data-modal')
