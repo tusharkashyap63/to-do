@@ -13,40 +13,57 @@
     0 100px 80px rgba(0, 0, 0, 0.12);
 
   .note-header {
-    padding: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     @include flexboxCenter();
     justify-content: space-between;
     background-color: var(--text-color1);
+    position: relative;
     border-radius: 6px 6px 0 0;
     color: var(--color-accent);
 
     button {
-      font-size: 0.8rem;
-      font-weight: 600;
-      border: none;
-      outline: none;
-      background-color: var(--color-accent);
-      padding: 0.3rem 0.6rem;
-      border-radius: 50%;
-      color: var(--text-color1);
-      cursor: pointer;
+      position: absolute;
+      right: 5px;
+      top: 0px;
+      width: 20px;
+      height: 20px;
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 1;
+      }
+      &:before,
+      &:after {
+        position: absolute;
+        left: 3px;
+        content: ' ';
+        height: 20px;
+        width: 2px;
+        background-color: var(--color-accent);
+      }
+      &:before {
+        transform: rotate(45deg);
+      }
+      &:after {
+        transform: rotate(-45deg);
+      }
     }
   }
 
   p {
-    padding: 1rem 1rem 0.75rem 1rem;
+    padding: 0.75rem 1rem;
     color: var(--text-color1);
   }
 
   button {
-    display: block;
     outline: none;
     cursor: pointer;
     border: none;
-    background-color: var(--color-accent);
-    color: var(--text-color1);
+    margin: 0 0 0.75rem 0.75rem;
+    background-color: var(--text-color1);
+    color: var(--color-primary);
+    font-family: var(--font-button);
     padding: 0.65rem;
-    border-radius: 6px 0 6px 0;
-    margin-left: auto;
+    border-radius: 6px;
   }
 }

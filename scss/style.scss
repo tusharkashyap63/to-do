@@ -11,6 +11,16 @@ body {
   background-color: var(--color-primary);
   margin: auto;
 }
+.logo {
+  height: 55px;
+  width: 100vw;
+  text-align: center;
+  background-color: var(--color-accent);
+
+  img {
+    height: 50px;
+  }
+}
 .appInterface {
   display: flex;
 }

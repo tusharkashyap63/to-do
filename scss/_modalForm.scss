@@ -29,13 +29,14 @@ form {
     cursor: pointer;
     border: none;
     outline: none;
+    font-family: var(--font-button);
     margin: 2rem 0 0 0;
-    border-radius: 6px;
     padding: 0.7rem 1.7rem;
     font-size: 1.2rem;
-    color: var(--text-color1);
-    font-weight: 500;
-    background-color: var(--color-accent);
+    color: var(--color-primary);
+    background: var(--text-color1);
+    border-radius: 12px;
+    box-shadow: 0 6px 30px -10px rgba(#4a74c9, 1);
   }
 
   .error-msg {

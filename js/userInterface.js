@@ -43,7 +43,7 @@ export default class UI {
     newNote.classList.add('noteCard');
     newNote.innerHTML = `<header class="note-header">
             <h3>${note.heading}</h3>
-            <button class="trashNoteTodo">x</button>
+            <button class="trashNoteTodo"></button>
           </header>
           <p>${note.description}</p>
           <button class="moveToDoneFromTodo">Move to Done</button>`;
@@ -56,7 +56,7 @@ export default class UI {
     newNote.classList.add('noteCard');
     newNote.innerHTML = `<header class="note-header">
             <h3>${note.heading}</h3>
-            <button class="trashNoteInprogress">x</button>
+            <button class="trashNoteInprogress"></button>
           </header>
           <p>${note.description}</p>
           <button class="moveToDoneFromInprogress">Move to Done</button>`;
@@ -72,7 +72,7 @@ export default class UI {
     newNote.classList.add('noteCard');
     newNote.innerHTML = `<header class="note-header">
             <h3>${note.heading}</h3>
-            <button class="trashNoteDone">x</button>
+            <button class="trashNoteDone"></button>
           </header>
           <p>${note.description}</p>`;
     list.appendChild(newNote);

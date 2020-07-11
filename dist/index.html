@@ -7,6 +7,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Muli&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://kit.fontawesome.com/f2a0111627.js"
       crossorigin="anonymous"
@@ -15,6 +19,7 @@
   </head>
 
   <body>
+    <div class="logo"><img src="../assets/images/logo.png" alt="" /></div>
     <div class="appInterface">
       <section class="projectSection">
         <div class="addProject">
@@ -37,7 +42,7 @@
                 placeholder="Name"
                 id="projectName"
               />
-              <button type="submit" id="projectSubmit">ADD</button>
+              <button type="submit" id="projectSubmit">Add</button>
             </form>
           </div>
         </div>
@@ -51,7 +56,7 @@
         <section class="toDoSection">
           <header class="section-head">
             <h3>To Do</h3>
-            <button data-add="todo">+ NEW</button>
+            <button data-add="todo">+ New</button>
           </header>
           <!-- Add todo modal -->
           <div class="modal" data-modal="todo">
@@ -76,7 +81,7 @@
                   id="todoDescription"
                 />
                 <button type="submit" class="noteSubmit" id="todoSubmit">
-                  ADD
+                  Add
                 </button>
                 <p class="error-msg"></p>
               </form>
@@ -88,7 +93,7 @@
         <section class="inProgressSection">
           <header class="section-head">
             <h3>In Progress</h3>
-            <button data-add="inprogress">+ NEW</button>
+            <button data-add="inprogress">+ New</button>
           </header>
           <!-- Add inprogress modal -->
           <div class="modal" data-modal="inprogress">
@@ -113,7 +118,7 @@
                   id="inprogressDescription"
                 />
                 <button type="submit" class="noteSubmit" id="inprogressSubmit">
-                  ADD
+                  Add
                 </button>
                 <p class="error-msg"></p>
               </form>
