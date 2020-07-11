@@ -12,23 +12,29 @@
 
 .modal-content {
   background-color: var(--color-primary);
+  border-radius: 8px;
   margin: 10% auto;
-  width: 60%;
+  width: 65%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
 
   .modal-header {
     @include flexboxCenter();
+    border-radius: 8px 8px 0 0;
     justify-content: space-between;
     padding: 1rem;
     background-color: var(--color-accent);
-    color: var(--color-primary);
+    color: var(--text-color1);
+
+    h2 {
+      font-size: 2rem;
+    }
 
     button {
       font-size: 1.5rem;
       background: none;
       outline: none;
       border: none;
-      color: var(--color-primary);
+      color: var(--text-color1);
       cursor: pointer;
     }
   }

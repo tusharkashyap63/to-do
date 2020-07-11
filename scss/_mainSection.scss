@@ -3,25 +3,26 @@ main {
   justify-content: space-between;
   width: 80%;
   clear: right;
-  padding: 2rem 1rem;
+  padding: 0 1rem;
 
   section {
     width: 33.33333%;
-    padding: 0 1rem;
+    padding: 1rem;
   }
   .section-head {
     @include flexboxCenter();
     justify-content: space-between;
+    font-size: 1.2rem;
 
     button {
       border: none;
       border-radius: 20px;
-      padding: 0.3rem 0.6rem;
+      padding: 0.3rem 0.7rem;
       cursor: pointer;
-      font-weight: 400;
+      font-weight: 700;
       outline: none;
-      background-color: var(--color-button);
-      color: var(--color-primary);
+      background-color: var(--color-accent);
+      color: var(--text-color1);
     }
   }
 }

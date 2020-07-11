@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.min.css" />
     <script
       src="https://kit.fontawesome.com/f2a0111627.js"
       crossorigin="anonymous"
@@ -19,14 +18,14 @@
     <div class="appInterface">
       <section class="projectSection">
         <div class="addProject">
-          <h2>Projects</h2>
+          <h2>PROJECTS</h2>
           <button class="addProjectButton" data-add="project">+</button>
         </div>
         <!-- Add project modal -->
         <div class="modal" data-modal="project">
           <div class="modal-content">
             <header class="modal-header">
-              <h2>New project</h2>
+              <h2>New Project</h2>
               <button data-close="project">
                 <i class="far fa-window-close"></i>
               </button>
@@ -38,7 +37,7 @@
                 placeholder="Name"
                 id="projectName"
               />
-              <button type="submit" id="projectSubmit">Add</button>
+              <button type="submit" id="projectSubmit">ADD</button>
             </form>
           </div>
         </div>
@@ -58,7 +57,7 @@
           <div class="modal" data-modal="todo">
             <div class="modal-content">
               <header class="modal-header">
-                <h2>Add task</h2>
+                <h2>Add Task</h2>
                 <button data-close="todo">
                   <i class="far fa-window-close"></i>
                 </button>
@@ -73,12 +72,13 @@
                 <input
                   class="form-note"
                   type="text"
-                  placeholder="Note"
+                  placeholder="Comments(optional)"
                   id="todoDescription"
                 />
                 <button type="submit" class="noteSubmit" id="todoSubmit">
-                  Add
+                  ADD
                 </button>
+                <p class="error-msg"></p>
               </form>
             </div>
           </div>
@@ -94,7 +94,7 @@
           <div class="modal" data-modal="inprogress">
             <div class="modal-content">
               <header class="modal-header">
-                <h2>Add task</h2>
+                <h2>Add Task</h2>
                 <button data-close="inprogress">
                   <i class="far fa-window-close"></i>
                 </button>
@@ -109,12 +109,13 @@
                 <input
                   class="form-note"
                   type="text"
-                  placeholder="Note"
+                  placeholder="Comments(optional)"
                   id="inprogressDescription"
                 />
                 <button type="submit" class="noteSubmit" id="inprogressSubmit">
-                  Add
+                  ADD
                 </button>
+                <p class="error-msg"></p>
               </form>
             </div>
           </div>

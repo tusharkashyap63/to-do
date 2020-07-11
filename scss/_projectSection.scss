@@ -4,13 +4,9 @@
   width: 20%;
   height: 100vh;
   background-color: var(--color-accent);
-  color: var(--color-primary);
+  color: var(--text-color1);
   padding: 1rem 0;
   font-weight: 600;
-
-  h2 {
-    padding: 0 0.5rem;
-  }
 
   ul {
     list-style: none;
@@ -19,29 +15,31 @@
       @include flexboxCenter();
       justify-content: space-between;
       cursor: pointer;
-      padding: 0.3rem 0.5rem;
+      padding: 0.4rem 0.5rem;
+
+      #deleteProject {
+        color: var(--text-color1);
+      }
     }
 
     .active {
-      background-color: var(--color-primary);
+      background-color: #edf5e1;
       color: var(--text-color1);
     }
   }
 }
 .addProject {
-  display: flex;
+  @include flexboxCenter();
   justify-content: space-between;
-  align-items: center;
+  padding: 0 0.5rem;
   padding-bottom: 1.5rem;
 
   .addProjectButton {
     background-color: var(--color-accent);
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    color: var(--color-primary);
+    color: var(--text-color1);
+    font-weight: 600;
+    font-size: 1.4rem;
     border: none;
-    font-size: 1.3rem;
     cursor: pointer;
     outline: none;
   }

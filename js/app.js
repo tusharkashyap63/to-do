@@ -1,3 +1,4 @@
+import '../scss/style.scss';
 import Modal from './modals';
 import UI from './userInterface';
 
@@ -225,26 +226,50 @@ document.querySelectorAll('.noteSubmit').forEach((button) =>
     e.preventDefault();
     if (e.target.id === 'todoSubmit') {
       const todoHeadingInput = document.getElementById('todoHeading').value;
-      const todoDescriptionInput = document.getElementById('todoDescription')
-        .value;
-      const newNote = new Note(todoHeadingInput, todoDescriptionInput);
-      Note.addNoteToTodo(newNote);
-      UI.addNoteToTodoList(newNote);
+      if (todoHeadingInput === '') {
+        document.querySelector('#todoSubmit + .error-msg').textContent =
+          'Please add a title!';
+        setTimeout(
+          () =>
+            (document.querySelector('#todoSubmit + .error-msg').textContent =
+              ''),
+          3000
+        );
+      } else {
+        const todoDescriptionInput = document.getElementById('todoDescription')
+          .value;
+        const newNote = new Note(todoHeadingInput, todoDescriptionInput);
+        Note.addNoteToTodo(newNote);
+        UI.addNoteToTodoList(newNote);
+        UI.clearFields();
+      }
     } else if (e.target.id === 'inprogressSubmit') {
       const inprogressHeadingInput = document.getElementById(
         'inprogressHeading'
       ).value;
-      const inprogressDescriptionInput = document.getElementById(
-        'inprogressDescription'
-      ).value;
-      const newNote = new Note(
-        inprogressHeadingInput,
-        inprogressDescriptionInput
-      );
-      Note.addNoteToInProgress(newNote);
-      UI.addNoteToInprogressList(newNote);
+      if (inprogressHeadingInput === '') {
+        document.querySelector('#inprogressSubmit + .error-msg').textContent =
+          'Please add a title!';
+        setTimeout(
+          () =>
+            (document.querySelector(
+              '#inprogressSubmit + .error-msg'
+            ).textContent = ''),
+          3000
+        );
+      } else {
+        const inprogressDescriptionInput = document.getElementById(
+          'inprogressDescription'
+        ).value;
+        const newNote = new Note(
+          inprogressHeadingInput,
+          inprogressDescriptionInput
+        );
+        Note.addNoteToInProgress(newNote);
+        UI.addNoteToInprogressList(newNote);
+        UI.clearFields();
+      }
     }
-    UI.clearFields();
   })
 );
 
