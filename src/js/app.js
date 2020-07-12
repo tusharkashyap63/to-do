@@ -3,11 +3,7 @@ import Modal from './modals';
 import UI from './userInterface';
 
 function _instanceof(left, right) {
-  if (
-    right != null &&
-    typeof Symbol !== 'undefined' &&
-    right[Symbol.hasInstance]
-  ) {
+  if (right != null && typeof Symbol !== 'undefined' && right[Symbol.hasInstance]) {
     return !!right[Symbol.hasInstance](left);
   } else {
     return left instanceof right;
@@ -73,7 +69,7 @@ class Project {
   static changeActiveProject() {
     const projects = document.querySelectorAll('.project');
     const projectsArr = Array.from(projects);
-    for (let i in projectsArr) {
+    for (let i = 0; i < projectsArr.length; i++) {
       if (projectsArr[i].classList.contains('active')) {
         ProjectData.activeProject = i;
       }
@@ -89,7 +85,7 @@ class Project {
     e.target.parentElement.classList.add('toBeDeleted');
     const deleteIcons = document.querySelectorAll('#deleteProject');
     const deleteIconsArr = Array.from(deleteIcons);
-    for (let i in deleteIconsArr) {
+    for (let i = 0; i < deleteIconsArr.length; i++) {
       if (deleteIconsArr[i].parentElement.classList.contains('toBeDeleted')) {
         const id = Number(i);
         ProjectData.projectData.splice(id + 1, 1); // id+1 because inbox does not have a delete icon
@@ -104,90 +100,34 @@ class Note {
     this.description = description;
   }
 
-  static addNoteToTodo(note) {
-    ProjectData.projectData[ProjectData.activeProject].todo.push(note);
+  static addNote(note, type) {
+    ProjectData.projectData[ProjectData.activeProject][type].push(note);
   }
 
-  static addNoteToInProgress(note) {
-    ProjectData.projectData[ProjectData.activeProject].inprogress.push(note);
-  }
-
-  static deleteNoteTodo(e) {
+  static deleteNote(e, type, delButtons) {
     e.target.parentElement.classList.add('toBeDeleted');
-    let deleteButtons = document.querySelectorAll('.trashNoteTodo');
+    let deleteButtons = document.querySelectorAll(delButtons);
     let deleteButtonsArr = Array.from(deleteButtons);
-    for (let i in deleteButtonsArr) {
+    for (let i = 0; i < deleteButtonsArr.length; i++) {
       if (deleteButtonsArr[i].parentElement.classList.contains('toBeDeleted')) {
         let id = Number(i);
-        ProjectData.projectData[ProjectData.activeProject].todo.splice(id, 1);
+        ProjectData.projectData[ProjectData.activeProject][type].splice(id, 1);
       }
     }
   }
 
-  static deleteNoteInprogress(e) {
-    e.target.parentElement.classList.add('toBeDeleted');
-    let deleteButtons = document.querySelectorAll('.trashNoteInprogress');
-    let deleteButtonsArr = Array.from(deleteButtons);
-    for (let i in deleteButtonsArr) {
-      if (deleteButtonsArr[i].parentElement.classList.contains('toBeDeleted')) {
-        let id = Number(i);
-        ProjectData.projectData[ProjectData.activeProject].inprogress.splice(
-          id,
-          1
-        );
-      }
-    }
-  }
-
-  static deleteNoteDone(e) {
-    e.target.parentElement.classList.add('toBeDeleted');
-    let deleteButtons = document.querySelectorAll('.trashNoteDone');
-    let deleteButtonsArr = Array.from(deleteButtons);
-    for (let i in deleteButtonsArr) {
-      if (deleteButtonsArr[i].parentElement.classList.contains('toBeDeleted')) {
-        let id = Number(i);
-        ProjectData.projectData[ProjectData.activeProject].done.splice(id, 1);
-      }
-    }
-  }
-
-  static moveNoteFromTodoToDone(e) {
+  static moveNoteToDone(e, type, mvButtons) {
     e.target.parentElement.classList.add('toBeMoved');
-    let moveButtons = document.querySelectorAll('.moveToDoneFromTodo');
+    let moveButtons = document.querySelectorAll(mvButtons);
     let moveButtonsArr = Array.from(moveButtons);
-    for (let i in moveButtonsArr) {
+    for (let i = 0; i < moveButtonsArr.length; i++) {
       if (moveButtonsArr[i].parentElement.classList.contains('toBeMoved')) {
         let id = Number(i);
         ProjectData.projectData[ProjectData.activeProject].done.push(
-          ProjectData.projectData[ProjectData.activeProject].todo[id]
+          ProjectData.projectData[ProjectData.activeProject][type][id]
         );
-        UI.moveNoteToDoneList(
-          ProjectData.projectData[ProjectData.activeProject].todo[id],
-          e
-        );
-        ProjectData.projectData[ProjectData.activeProject].todo.splice(id, 1);
-      }
-    }
-  }
-
-  static moveNoteFromInprogressToDone(e) {
-    e.target.parentElement.classList.add('toBeMoved');
-    let moveButtons = document.querySelectorAll('.moveToDoneFromInprogress');
-    let moveButtonsArr = Array.from(moveButtons);
-    for (let i in moveButtonsArr) {
-      if (moveButtonsArr[i].parentElement.classList.contains('toBeMoved')) {
-        let id = Number(i);
-        ProjectData.projectData[ProjectData.activeProject].done.push(
-          ProjectData.projectData[ProjectData.activeProject].inprogress[id]
-        );
-        UI.moveNoteToDoneList(
-          ProjectData.projectData[ProjectData.activeProject].inprogress[id],
-          e
-        );
-        ProjectData.projectData[ProjectData.activeProject].inprogress.splice(
-          id,
-          1
-        );
+        UI.moveNoteToDoneList(ProjectData.projectData[ProjectData.activeProject][type][id], e);
+        ProjectData.projectData[ProjectData.activeProject][type].splice(id, 1);
       }
     }
   }
@@ -199,10 +139,14 @@ class Note {
 document.getElementById('projectSubmit').addEventListener('click', (e) => {
   e.preventDefault();
   const projectNameInput = document.getElementById('projectName').value;
-  const newProject = new Project(projectNameInput);
-  UI.addProjectToList(newProject);
-  Project.addProject(newProject);
-  UI.clearFields();
+  if (projectNameInput === '') {
+    UI.showAlert('#projectSubmit + .error-msg');
+  } else {
+    const newProject = new Project(projectNameInput);
+    UI.addProjectToList(newProject);
+    Project.addProject(newProject);
+    UI.clearFields();
+  }
 });
 
 // To delete a project or to change the active project
@@ -214,9 +158,7 @@ document.getElementById('projectList').addEventListener('click', (e) => {
   } else if (e.target.classList.contains('project')) {
     UI.toggleActiveProject(e);
     Project.changeActiveProject();
-    UI.displayActiveProjectNotes(
-      ProjectData.projectData[ProjectData.activeProject]
-    );
+    UI.displayActiveProjectNotes(ProjectData.projectData[ProjectData.activeProject]);
   }
 });
 
@@ -227,45 +169,22 @@ document.querySelectorAll('.noteSubmit').forEach((button) =>
     if (e.target.id === 'todoSubmit') {
       const todoHeadingInput = document.getElementById('todoHeading').value;
       if (todoHeadingInput === '') {
-        document.querySelector('#todoSubmit + .error-msg').textContent =
-          'Please add a title!';
-        setTimeout(
-          () =>
-            (document.querySelector('#todoSubmit + .error-msg').textContent =
-              ''),
-          3000
-        );
+        UI.showAlert('#todoSubmit + .error-msg');
       } else {
-        const todoDescriptionInput = document.getElementById('todoDescription')
-          .value;
+        const todoDescriptionInput = document.getElementById('todoDescription').value;
         const newNote = new Note(todoHeadingInput, todoDescriptionInput);
-        Note.addNoteToTodo(newNote);
+        Note.addNote(newNote, 'todo');
         UI.addNoteToTodoList(newNote);
         UI.clearFields();
       }
     } else if (e.target.id === 'inprogressSubmit') {
-      const inprogressHeadingInput = document.getElementById(
-        'inprogressHeading'
-      ).value;
+      const inprogressHeadingInput = document.getElementById('inprogressHeading').value;
       if (inprogressHeadingInput === '') {
-        document.querySelector('#inprogressSubmit + .error-msg').textContent =
-          'Please add a title!';
-        setTimeout(
-          () =>
-            (document.querySelector(
-              '#inprogressSubmit + .error-msg'
-            ).textContent = ''),
-          3000
-        );
+        UI.showAlert('#inprogressSubmit + .error-msg');
       } else {
-        const inprogressDescriptionInput = document.getElementById(
-          'inprogressDescription'
-        ).value;
-        const newNote = new Note(
-          inprogressHeadingInput,
-          inprogressDescriptionInput
-        );
-        Note.addNoteToInProgress(newNote);
+        const inprogressDescriptionInput = document.getElementById('inprogressDescription').value;
+        const newNote = new Note(inprogressHeadingInput, inprogressDescriptionInput);
+        Note.addNote(newNote, 'inprogress');
         UI.addNoteToInprogressList(newNote);
         UI.clearFields();
       }
@@ -276,7 +195,7 @@ document.querySelectorAll('.noteSubmit').forEach((button) =>
 // To delete a note from todo
 document.getElementById('todoList').addEventListener('click', (e) => {
   if (e.target.classList.contains('trashNoteTodo')) {
-    Note.deleteNoteTodo(e);
+    Note.deleteNote(e, 'todo', '.trashNoteTodo');
     UI.deleteNoteFromList(e);
   }
 });
@@ -284,7 +203,7 @@ document.getElementById('todoList').addEventListener('click', (e) => {
 // To delete a note from inprogress
 document.getElementById('inprogressList').addEventListener('click', (e) => {
   if (e.target.classList.contains('trashNoteInprogress')) {
-    Note.deleteNoteInprogress(e);
+    Note.deleteNote(e, 'inprogress', '.trashNoteInprogress');
     UI.deleteNoteFromList(e);
   }
 });
@@ -292,7 +211,7 @@ document.getElementById('inprogressList').addEventListener('click', (e) => {
 // To delete a note from done
 document.getElementById('doneList').addEventListener('click', (e) => {
   if (e.target.classList.contains('trashNoteDone')) {
-    Note.deleteNoteDone(e);
+    Note.deleteNote(e, 'done', '.trashNoteDone');
     UI.deleteNoteFromList(e);
   }
 });
@@ -301,9 +220,9 @@ document.getElementById('doneList').addEventListener('click', (e) => {
 document.querySelectorAll('.notesContainer').forEach((container) => {
   container.addEventListener('click', (e) => {
     if (e.target.classList.contains('moveToDoneFromTodo')) {
-      Note.moveNoteFromTodoToDone(e);
+      Note.moveNoteToDone(e, 'todo', '.moveToDoneFromTodo');
     } else if (e.target.classList.contains('moveToDoneFromInprogress')) {
-      Note.moveNoteFromInprogressToDone(e);
+      Note.moveNoteToDone(e, 'inprogress', '.moveToDoneFromInprogress');
     }
   });
 });

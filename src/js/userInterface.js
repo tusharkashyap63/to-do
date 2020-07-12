@@ -95,12 +95,15 @@ export default class UI {
     }
   }
 
+  static showAlert(here) {
+    document.querySelector(
+      here
+    ).innerHTML = `<i class="fas fa-exclamation-circle"></i>Please add a title!`;
+    setTimeout(() => (document.querySelector(here).innerHTML = ''), 3000);
+  }
+
   static clearFields() {
-    document
-      .querySelectorAll('.form-heading')
-      .forEach((heading) => (heading.value = ''));
-    document
-      .querySelectorAll('.form-note')
-      .forEach((note) => (note.value = ''));
+    document.querySelectorAll('.form-heading').forEach((heading) => (heading.value = ''));
+    document.querySelectorAll('.form-note').forEach((note) => (note.value = ''));
   }
 }

@@ -14,3 +14,10 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin removeBtnDefaults() {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}

@@ -26,9 +26,7 @@ form {
   }
 
   button {
-    cursor: pointer;
-    border: none;
-    outline: none;
+    @include removeBtnDefaults();
     font-family: var(--font-button);
     margin: 2rem 0 0 0;
     padding: 0.7rem 1.7rem;
@@ -43,6 +41,6 @@ form {
     margin-left: 0.5rem;
     font-size: 1.2rem;
     display: inline;
-    color: var(--text-color1);
+    color: #dc3545;
   }
 }

@@ -1,8 +1,8 @@
 .projectSection {
   display: flex;
   flex-direction: column;
-  width: 20vw;
-  height: 90vh;
+  width: 22%;
+  height: 100vh;
   background-color: var(--color-accent);
   color: var(--text-color1);
   font-weight: 600;
@@ -30,18 +30,16 @@
 }
 .addProject {
   @include flexboxCenter();
-  background-color: var(--text-color1);
-  color: var(--color-primary);
+  background-color: var(--color-accent);
+  color: var(--text-color1);
   justify-content: space-between;
-  padding: 1rem 0.5rem 1.5rem 0.5rem;
+  padding: 1rem 0.5rem 1rem 0.5rem;
 
   .addProjectButton {
-    background-color: var(--text-color1);
-    color: var(--color-primary);
+    @include removeBtnDefaults();
+    background-color: var(--color-accent);
+    color: var(--text-color1);
     font-weight: 600;
     font-size: 1.4rem;
-    border: none;
-    cursor: pointer;
-    outline: none;
   }
 }

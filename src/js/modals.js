@@ -7,10 +7,8 @@ export default class Modal {
   static openModal(e) {
     const modals = Modal.getModals();
     modals.forEach((modal) => {
-      if (
-        e.target.getAttribute('data-add') === modal.getAttribute('data-modal')
-      ) {
-        modal.style.display = 'block';
+      if (e.target.getAttribute('data-add') === modal.getAttribute('data-modal')) {
+        modal.classList.add('show');
       }
     });
   }
@@ -18,7 +16,7 @@ export default class Modal {
   // Close
   static closeModal() {
     let modals = Modal.getModals();
-    modals.forEach((modal) => (modal.style.display = 'none'));
+    modals.forEach((modal) => modal.classList.remove('show'));
   }
 
   // Close If Outside Click
@@ -26,7 +24,7 @@ export default class Modal {
     let modals = Modal.getModals();
     modals.forEach((modal) => {
       if (e.target === modal) {
-        modal.style.display = 'none';
+        modal.classList.remove('show');
       }
     });
   }

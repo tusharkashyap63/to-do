@@ -12,13 +12,15 @@ body {
   margin: auto;
 }
 .logo {
-  height: 55px;
-  width: 100vw;
+  height: 50px;
+  width: 100%;
   text-align: center;
-  background-color: var(--color-accent);
+  background-color: var(--text-color1);
 
   img {
-    height: 50px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 .appInterface {

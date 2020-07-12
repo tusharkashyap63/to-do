@@ -7,7 +7,11 @@
   height: 100%;
   width: 100%;
   overflow: auto;
-  animation: modalAnim 0.7s linear forwards;
+  animation: modalAnim 0.6s linear forwards;
+}
+
+.modal.show {
+  display: block;
 }
 
 @keyframes modalAnim {
@@ -40,12 +44,9 @@
     }
 
     button {
+      @include removeBtnDefaults();
       font-size: 1.5rem;
-      background: none;
-      outline: none;
-      border: none;
       color: var(--color-primary);
-      cursor: pointer;
     }
   }
 }

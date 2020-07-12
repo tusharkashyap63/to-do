@@ -1,7 +1,7 @@
 main {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 78%;
   clear: right;
   padding: 0 1rem;
 
@@ -15,12 +15,10 @@ main {
     font-size: 1.2rem;
 
     button {
-      border: none;
+      @include removeBtnDefaults();
       border-radius: 20px;
       padding: 0.3rem 0.7rem;
-      cursor: pointer;
       font-family: var(--font-button);
-      outline: none;
       background-color: var(--text-color1);
       box-shadow: 0 6px 30px -10px rgba(#4a74c9, 1);
       color: var(--color-primary);
