@@ -234,7 +234,14 @@ document.querySelectorAll('.notesContainer').forEach((container) => {
 document
   .querySelectorAll('[data-add]')
   .forEach((button) => button.addEventListener('click', Modal.openModal));
+
 document
-  .querySelectorAll('[data-close')
+  .querySelectorAll('[data-close]')
   .forEach((button) => button.addEventListener('click', Modal.closeModal));
 window.addEventListener('click', Modal.outsideClick);
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    Modal.closeModal();
+  }
+});
