@@ -1,6 +1,7 @@
 import '../scss/style.scss';
-import Modal from './modals';
 import UI from './userInterface';
+import Modal from './modals';
+import DragNDrop from './dragNdrop';
 
 function _instanceof(left, right) {
   if (right != null && typeof Symbol !== 'undefined' && right[Symbol.hasInstance]) {
@@ -58,6 +59,8 @@ _defineProperty(ProjectData, 'activeProject', 0);
 //   static activeProject = 0;
 // }
 
+export default ProjectData;
+
 class Project {
   constructor(name) {
     this.name = name;
@@ -68,9 +71,8 @@ class Project {
 
   static changeActiveProject() {
     const projects = document.querySelectorAll('.project');
-    const projectsArr = Array.from(projects);
-    for (let i = 0; i < projectsArr.length; i++) {
-      if (projectsArr[i].classList.contains('active')) {
+    for (let i = 0; i < projects.length; i++) {
+      if (projects[i].classList.contains('active')) {
         ProjectData.activeProject = i;
       }
     }
@@ -84,9 +86,8 @@ class Project {
   static deleteProject(e) {
     e.target.parentElement.classList.add('toBeDeleted');
     const deleteIcons = document.querySelectorAll('#deleteProject');
-    const deleteIconsArr = Array.from(deleteIcons);
-    for (let i = 0; i < deleteIconsArr.length; i++) {
-      if (deleteIconsArr[i].parentElement.classList.contains('toBeDeleted')) {
+    for (let i = 0; i < deleteIcons.length; i++) {
+      if (deleteIcons[i].parentElement.classList.contains('toBeDeleted')) {
         const id = Number(i);
         ProjectData.projectData.splice(id + 1, 1); // id+1 because inbox does not have a delete icon
       }
@@ -107,9 +108,8 @@ class Note {
   static deleteNote(e, type, delButtons) {
     e.target.parentElement.classList.add('toBeDeleted');
     let deleteButtons = document.querySelectorAll(delButtons);
-    let deleteButtonsArr = Array.from(deleteButtons);
-    for (let i = 0; i < deleteButtonsArr.length; i++) {
-      if (deleteButtonsArr[i].parentElement.classList.contains('toBeDeleted')) {
+    for (let i = 0; i < deleteButtons.length; i++) {
+      if (deleteButtons[i].parentElement.classList.contains('toBeDeleted')) {
         let id = Number(i);
         ProjectData.projectData[ProjectData.activeProject][type].splice(id, 1);
       }
@@ -119,9 +119,8 @@ class Note {
   static moveNoteToDone(e, type, mvButtons) {
     e.target.parentElement.classList.add('toBeMoved');
     let moveButtons = document.querySelectorAll(mvButtons);
-    let moveButtonsArr = Array.from(moveButtons);
-    for (let i = 0; i < moveButtonsArr.length; i++) {
-      if (moveButtonsArr[i].parentElement.classList.contains('toBeMoved')) {
+    for (let i = 0; i < moveButtons.length; i++) {
+      if (moveButtons[i].parentElement.classList.contains('toBeMoved')) {
         let id = Number(i);
         ProjectData.projectData[ProjectData.activeProject].done.push(
           ProjectData.projectData[ProjectData.activeProject][type][id]
@@ -244,4 +243,27 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     Modal.closeModal();
   }
+});
+
+// Drag and drop events
+document.querySelectorAll('.dragContainer').forEach((container) => {
+  container.addEventListener('dragstart', (e) => {
+    e.target.classList.add('dragging');
+    DragNDrop.deleteNoteDragged(e);
+  });
+
+  container.addEventListener('dragend', (e) => {
+    e.target.classList.remove('dragging');
+  });
+
+  container.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const afterElement = DragNDrop.getDragAfterElement(container, e.clientY);
+    const draggable = document.querySelector('.dragging');
+    if (afterElement === null) {
+      container.appendChild(draggable);
+    } else {
+      container.insertBefore(draggable, afterElement);
+    }
+  });
 });

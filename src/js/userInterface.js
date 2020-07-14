@@ -40,6 +40,7 @@ export default class UI {
   static addNoteToTodoList(note) {
     let list = document.getElementById('todoList');
     let newNote = document.createElement('div');
+    newNote.setAttribute('draggable', 'true');
     newNote.classList.add('noteCard');
     newNote.innerHTML = `<header class="note-header">
             <h3>${note.heading}</h3>
@@ -53,6 +54,7 @@ export default class UI {
   static addNoteToInprogressList(note) {
     let list = document.getElementById('inprogressList');
     let newNote = document.createElement('div');
+    newNote.setAttribute('draggable', 'true');
     newNote.classList.add('noteCard');
     newNote.innerHTML = `<header class="note-header">
             <h3>${note.heading}</h3>
