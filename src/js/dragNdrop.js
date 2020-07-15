@@ -18,15 +18,31 @@ export default class DragNDrop {
     ).element;
   }
 
-  static deleteNoteDragged(e) {
-    const notes = document.querySelectorAll('.noteCard');
+  static deleteNoteDragged(notesOfSpecificType, type) {
+    const notes = document.querySelectorAll(notesOfSpecificType);
     notes.forEach((note, index) => {
       if (note.classList.contains('dragging')) {
-        ProjectData.projectData[ProjectData.activeProject].todo.splice(index, 1);
+        DragNDrop.tempData = ProjectData.projectData[ProjectData.activeProject][type].splice(
+          index,
+          1
+        );
       }
     });
-    console.log(ProjectData.projectData);
   }
 
-  static addNoteDropped(e) {}
+  static addNoteDropped(notesOfSpecificType, type) {
+    const notes = document.querySelectorAll(notesOfSpecificType);
+    notes.forEach((note, index) => {
+      if (note.classList.contains('dropped')) {
+        ProjectData.projectData[ProjectData.activeProject][type].splice(
+          index,
+          0,
+          DragNDrop.tempData[0]
+        );
+      }
+    });
+    DragNDrop.tempData.pop();
+  }
 }
+
+DragNDrop.tempData;

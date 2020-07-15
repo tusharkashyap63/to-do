@@ -249,11 +249,22 @@ document.addEventListener('keydown', function (e) {
 document.querySelectorAll('.dragContainer').forEach((container) => {
   container.addEventListener('dragstart', (e) => {
     e.target.classList.add('dragging');
-    DragNDrop.deleteNoteDragged(e);
+    if ([...document.querySelectorAll('#todoList>.noteCard')].includes(e.target)) {
+      DragNDrop.deleteNoteDragged('#todoList>.noteCard', 'todo');
+    } else if ([...document.querySelectorAll('#inprogressList>.noteCard')].includes(e.target)) {
+      DragNDrop.deleteNoteDragged('#inprogressList>.noteCard', 'inprogress');
+    }
   });
 
   container.addEventListener('dragend', (e) => {
     e.target.classList.remove('dragging');
+    e.target.classList.add('dropped');
+    if ([...document.querySelectorAll('#todoList>.noteCard')].includes(e.target)) {
+      DragNDrop.addNoteDropped('#todoList>.noteCard', 'todo');
+    } else if ([...document.querySelectorAll('#inprogressList>.noteCard')].includes(e.target)) {
+      DragNDrop.addNoteDropped('#inprogressList>.noteCard', 'inprogress');
+    }
+    e.target.classList.remove('dropped');
   });
 
   container.addEventListener('dragover', (e) => {
