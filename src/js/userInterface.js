@@ -47,7 +47,7 @@ export default class UI {
             <button class="trashNoteTodo"></button>
           </header>
           <p>${note.description}</p>
-          <button class="moveToDoneFromTodo">Move to Done</button>`;
+          <button class="moveToDone">Move to Done</button>`;
     list.appendChild(newNote);
   }
 
@@ -61,7 +61,7 @@ export default class UI {
             <button class="trashNoteInprogress"></button>
           </header>
           <p>${note.description}</p>
-          <button class="moveToDoneFromInprogress">Move to Done</button>`;
+          <button class="moveToDone">Move to Done</button>`;
     list.appendChild(newNote);
   }
 

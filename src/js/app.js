@@ -76,6 +76,7 @@ class Project {
         ProjectData.activeProject = i;
       }
     }
+    console.log(ProjectData.projectData);
   }
 
   static addProject(project) {
@@ -218,10 +219,12 @@ document.getElementById('doneList').addEventListener('click', (e) => {
 // To move a note to Done
 document.querySelectorAll('.notesContainer').forEach((container) => {
   container.addEventListener('click', (e) => {
-    if (e.target.classList.contains('moveToDoneFromTodo')) {
-      Note.moveNoteToDone(e, 'todo', '.moveToDoneFromTodo');
-    } else if (e.target.classList.contains('moveToDoneFromInprogress')) {
-      Note.moveNoteToDone(e, 'inprogress', '.moveToDoneFromInprogress');
+    if ([...document.querySelectorAll('#todoList>.noteCard>.moveToDone')].includes(e.target)) {
+      Note.moveNoteToDone(e, 'todo', '#todoList>.noteCard>.moveToDone');
+    } else if (
+      [...document.querySelectorAll('#inprogressList>.noteCard>.moveToDone')].includes(e.target)
+    ) {
+      Note.moveNoteToDone(e, 'inprogress', '#inprogressList>.noteCard>.moveToDone');
     }
   });
 });
