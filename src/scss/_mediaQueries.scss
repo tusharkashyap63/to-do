@@ -1,0 +1,82 @@
+@media screen and (max-width: 875px) {
+  .appInterface {
+    flex-direction: column;
+  }
+
+  .projectSection {
+    width: 100%;
+    height: auto;
+    padding-bottom: 10px;
+
+    #listImg {
+      display: none;
+    }
+  }
+
+  main {
+    width: 100%;
+    flex-wrap: wrap;
+
+    section {
+      width: 50%;
+    }
+
+    .doneSection {
+      width: 100%;
+
+      .notesContainer {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .noteCard {
+        width: 48%;
+      }
+    }
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .appInterface {
+    flex-direction: column;
+  }
+
+  .projectSection {
+    width: 100%;
+    height: auto;
+    padding-bottom: 10px;
+
+    #listImg {
+      display: none;
+    }
+  }
+
+  main {
+    flex-direction: column;
+    width: 100%;
+
+    section {
+      width: 100%;
+    }
+
+    .doneSection {
+      .notesContainer {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .noteCard {
+        width: 100%;
+      }
+    }
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}

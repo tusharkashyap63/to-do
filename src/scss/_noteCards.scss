@@ -1,7 +1,7 @@
 .notesContainer {
   display: flex;
   flex-direction: column;
-  min-height: 150px; // for dragNdrop to work
+  min-height: 100px; // for dragNdrop to work
 }
 
 .noteCard {
